@@ -12,6 +12,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), ver
 - Slider tracks and icons of unavailable entities reach 3:1 against the card (were 1.6:1 to 2.3:1).
 - Heating and cooling differ on the thermostat ring (ink and light grey); error notices sit on a darker grey than warnings and information.
 - Keyboard focus on tiles is a 2 px ink ring with a paper gap, visible on reversed tiles too (with card-mod).
+- Keyboard focus rings of the frontend on tiles, button cards and badges were dropped because the card shadow was `none`; it is now an empty shadow.
 
 ### Changed
 - Press ripple switched off on tiles (with card-mod) and wherever the frontend reads the theme value.

@@ -103,7 +103,9 @@ Ink Wall:
   ha-card-border-color: "#111111"
   ha-card-border-width: "2px"
   ha-card-border-radius: "0"
-  ha-card-box-shadow: "none"
+  # An empty shadow instead of "none": the frontend appends its focus ring to this value, and "none" in a list
+  # would drop the ring on tiles, button cards and badges.
+  ha-card-box-shadow: "0 0 0 0 transparent"
   divider-color: "#777777"
   ha-color-border-neutral-quiet: "#777777"
   outline-color: "#111111"
