@@ -15,7 +15,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), ver
 
 ### Changed
 - Press ripple switched off on tiles (with card-mod) and wherever the frontend reads the theme value.
-- README: corrected the grey-level claim, added a note on full refreshes against ghosting, and named the remaining limits.
+- README: corrected the grey-level claim, added a note on full refreshes against ghosting, named the remaining limits, and added images of dark mode without card-mod and of the light dialog.
 
 ## [1.1.0] - 2026-11-25
 

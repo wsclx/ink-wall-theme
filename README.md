@@ -25,7 +25,9 @@ A strictly monochrome theme for Home Assistant, made for e-paper and e-ink wall 
 
 Without card-mod the theme still works: cards, rules, greys, spacing and fonts stay, switched-on devices show an ink icon instead of a reversed tile, and headings use the label font.
 
-![Without card-mod: outlined cards, switched-on devices show an ink icon](https://raw.githubusercontent.com/wsclx/ink-wall-theme/main/images/dashboard-light-desktop-no-cardmod.png)
+| Light without card-mod | Dark without card-mod |
+|---|---|
+| ![Light mode without card-mod: outlined cards, switched-on devices show an ink icon](https://raw.githubusercontent.com/wsclx/ink-wall-theme/main/images/dashboard-light-desktop-no-cardmod.png) | ![Dark mode without card-mod](https://raw.githubusercontent.com/wsclx/ink-wall-theme/main/images/dashboard-dark-desktop-no-cardmod.png) |
 
 ![Entity list in dark mode](https://raw.githubusercontent.com/wsclx/ink-wall-theme/main/images/entities-dark-desktop.png)
 
@@ -104,6 +106,9 @@ Change the variables below in a copy of the theme, or override them with card-mo
 
 - Home Assistant does not guarantee theme variables between releases. If something looks off after an update, please open an issue with your version.
 - **Coloured lights:** a light that reports a colour shows that colour in its tile icon, its brightness slider and its badge. The frontend sets it per light, so a theme cannot change it. With card-mod the tile turns ink and the badge grey; in the light's dialog the colour picker keeps its colours.
+
+  ![The light dialog keeps the colour of the light and its colour presets](https://raw.githubusercontent.com/wsclx/ink-wall-theme/main/images/more-info-light-desktop.png)
+
 - **Patterns:** a theme can only set colours and, with card-mod, the style of a rule (the dashed rule of unavailable tiles), not hatching or dot patterns. States that used to differ by colour alone (armed and triggered alarms, errors and warnings) differ by grey value, icon and text. The weather icons are filled shapes, so the sun is a grey disc rather than a line drawing.
 - Without card-mod a theme cannot fill a whole tile by its state or change its rule, only the icon. The reversed tile and the dashed rule need card-mod.
 - Switches keep their round shape and a few frontend transitions (about 0.2 s) stay: both are fixed in the frontend. The press ripple is switched off on tiles with card-mod and wherever the frontend reads the theme value; some controls keep their own.
