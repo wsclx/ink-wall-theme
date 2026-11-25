@@ -7,7 +7,7 @@
 #
 # Works without any add-on: colours, rules, corners, fonts and the disabled animations come from plain theme
 # variables. With card-mod 4.x installed (optional), the card-mod-* keys below turn tiles of switched-on devices
-# into solid ink tiles with paper text, set big numbers in the book serif, mark the selected sidebar entry
+# into solid ink tiles with paper text, give unavailable entities a dashed rule, set big numbers in the book serif, mark the selected sidebar entry
 # as an ink bar and give the sidebar the theme fonts. Without card-mod those keys are ignored.
 #
 # Fonts: system fonts only, nothing is downloaded. Numbers and titles use Charter (made for low-resolution
@@ -107,6 +107,9 @@ Ink Wall:
   ha-color-border-neutral-quiet: "#8a8a8a"
   outline-color: "#141414"
   outline-hover-color: "#141414"
+  # Paper between cards: 12 px keeps two 2 px rules apart on a low-resolution panel
+  ha-section-grid-row-gap: "12px"
+  ha-section-grid-column-gap: "12px"
 
   # Square corners everywhere; switches and round icons keep their shape (fixed in the frontend)
   ha-border-radius-sm: "0"
@@ -192,6 +195,13 @@ Ink Wall:
   ha-font-family-body: "var(--ink-wall-sans)"
   ha-font-family-heading: "var(--ink-wall-serif)"
   ha-card-header-font-family: "var(--ink-wall-serif)"
+  ha-heading-card-title-font-size: "20px"
+  # Tiles read from across the room: the state is as large as the name, not a small caption
+  ha-tile-info-primary-letter-spacing: "0"
+  ha-tile-info-secondary-font-size: "14px"
+  ha-tile-info-secondary-line-height: "20px"
+  ha-tile-info-secondary-font-weight: "400"
+  ha-tile-info-secondary-letter-spacing: "0"
   ha-font-family-code: "ui-monospace, Menlo, Consolas, 'DejaVu Sans Mono', monospace"
   code-font-family: "ui-monospace, Menlo, Consolas, 'DejaVu Sans Mono', monospace"
 
@@ -250,24 +260,28 @@ Ink Wall:
   weather-icon-cloud-front-color: "#c4c4c4"
   weather-icon-cloud-back-color: "#6b6b6b"
 
-  # Optional, card-mod 4.x: tiles of switchable entities that are on become a solid ink tile with paper text.
-  # The domain list matters: the tile card marks any entity with a value as active, sensors included.
+  # Optional, card-mod 4.x: a tile prints in reverse (paper on ink) while its device is doing something or needs
+  # a look: on, open, unlocked, playing, heating or cooling, cleaning, triggered. Tiles of entities that are
+  # unavailable or unknown get a dashed rule, so a dead sensor is visible without colour.
   # Big numbers of entity, sensor, weather and thermostat cards in the book serif.
   card-mod-card: |
-    ha-card.active:has(ha-tile-icon:is([data-domain=light], [data-domain=switch], [data-domain=fan], [data-domain=media_player], [data-domain=climate], [data-domain=input_boolean], [data-domain=humidifier], [data-domain=water_heater], [data-domain=vacuum], [data-domain=remote], [data-domain=siren], [data-domain=automation], [data-domain=script], [data-domain=cover])) {
+    ha-card:has(ha-tile-icon:is([data-state=on], [data-state=open], [data-state=opening], [data-state=closing], [data-state=unlocked], [data-state=unlocking], [data-state=jammed], [data-state=playing], [data-state=heat], [data-state=cool], [data-state=heat_cool], [data-state=auto], [data-state=dry], [data-state=fan_only], [data-state=cleaning], [data-state=returning], [data-state=mowing], [data-state=triggered], [data-state=pending], [data-state=arming])) {
       --ha-card-background: var(--ink-wall-ink);
       background: var(--ink-wall-ink);
       --tile-color: var(--ink-wall-paper) !important;
       --primary-text-color: var(--ink-wall-paper);
       --secondary-text-color: var(--ink-wall-paper);
+      --ha-tile-info-primary-color: var(--ink-wall-paper);
+      --ha-tile-info-secondary-color: var(--ink-wall-paper);
       --control-slider-background: var(--ink-wall-paper);
     }
+    ha-card:has(ha-tile-icon:is([data-state=unavailable], [data-state=unknown])) { border-style: dashed; }
     :host(hui-entity-card) .value, :host(hui-weather-forecast-card) .temp, :host(hui-sensor-card) .value { font-family: var(--ink-wall-serif); }
     :host(hui-thermostat-card) ha-state-control-climate-temperature { font-family: var(--ink-wall-serif); }
     :host(hui-heading-card) .title .heading { font-family: var(--ink-wall-serif); font-size: 20px; }
-  # Optional, card-mod 4.x: badges of coloured lights in ink instead of the light colour
+  # Optional, card-mod 4.x: badges have two inks only, full for active and grey for inactive (a light's own colour is dropped)
   card-mod-badge: |
-    ha-badge[style*="--badge-color:#"], ha-badge[style*="--badge-color:rgb"] { --badge-color: var(--state-light-active-color) !important; }
+    ha-badge.active { --badge-color: var(--state-icon-color) !important; }
   # Optional, card-mod 4.x: the dashboard title in the book serif
   card-mod-root: |
     .main-title { font-family: var(--ink-wall-serif); font-size: 26px; }
@@ -279,7 +293,6 @@ Ink Wall:
       --sidebar-selected-text-color: var(--ink-wall-paper);
       --sidebar-selected-icon-color: var(--ink-wall-paper);
     }
-    ha-list-item-button.selected::before { opacity: 0; }
 
   modes:
     light: {}

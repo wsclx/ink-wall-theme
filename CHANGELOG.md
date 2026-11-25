@@ -5,6 +5,16 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), ver
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-11-25
+
+### Changed
+- Tiles print in reverse by state instead of by device type (with card-mod): on, open, unlocked, playing, heating or cooling, cleaning, triggered. A paused player or a locked door stays outlined.
+- Badges show two inks only (with card-mod): active in full ink, inactive in grey.
+- The state line of tiles is as large as the name (14 px), section headings 20 px, 12 px of paper between cards.
+
+### Added
+- Tiles of unavailable or unknown entities get a dashed rule (with card-mod).
+
 ## [1.0.0] - 2026-11-25
 
 ### Added

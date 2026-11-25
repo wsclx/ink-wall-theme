@@ -17,12 +17,13 @@ A strictly monochrome theme for Home Assistant, made for e-paper and e-ink wall 
 - **No hue in the dashboard.** Every state colour of Home Assistant is mapped to a grey: lights, heating, cooling, alarms, locks, batteries, weather, energy, graphs, buttons, alerts. The dashboard looks the same on a greyscale panel as on a colour screen.
 - **States you can read without colour.** Strong states (on, heating, lit, open, triggered) are ink, calm states (cooling, locked, docked) are dark grey, off is light grey. Icons and state text stay as they are, so a state never depends on colour alone.
 - **Six grey values.** Light mode uses `#141414`, `#4d4d4d`, `#8a8a8a`, `#c4c4c4`, `#e6e6e6` and `#f4f4f4`, which survive the 16 grey levels of a typical e-ink panel. On a 4-level panel the light greys merge and the 2 px rules carry the layout.
-- **Flat and still.** Square corners, 2 px ink rules around every card, no shadows, no blur. Home Assistant's own animations are switched off.
+- **Flat and still.** Square corners, 2 px ink rules around every card with 12 px of paper between them, no shadows, no blur. Home Assistant's own animations are switched off.
+- **States you can read from across the room.** The state line of a tile is as large as its name, not a small caption.
 - **Book serif for numbers and titles** from the system: Charter on Apple devices (a typeface drawn for low-resolution printers), Palatino or Cambria on Windows, Noto Serif or DejaVu Serif on Android and Linux. Labels use Helvetica Neue or Arial. Nothing is downloaded.
 - **Dark mode is its own design:** light ink on dark grey with grey rules, switched-on devices as light tiles with dark text. It is not an inverted light mode.
-- **Optional extras with card-mod:** switched-on lights, switches, fans, media players, climate, covers and similar entities become solid ink tiles, big numbers and section headings switch to the serif, the selected sidebar entry becomes an ink bar, and coloured lights lose their colour in badges.
+- **Optional extras with card-mod:** a tile prints in reverse, paper on ink, while its device is doing something or needs a look (on, open, unlocked, playing, heating or cooling, cleaning, triggered). Tiles of unavailable or unknown entities get a dashed rule. Big numbers and section headings switch to the serif, the selected sidebar entry becomes an ink bar, and badges show only two inks, so coloured lights lose their colour there.
 
-Without card-mod the theme still works: cards, rules, greys and fonts stay, switched-on devices show an ink icon instead of a solid tile, and headings use the label font.
+Without card-mod the theme still works: cards, rules, greys, spacing and fonts stay, switched-on devices show an ink icon instead of a reversed tile, and headings use the label font.
 
 ![Without card-mod: outlined cards, switched-on devices show an ink icon](https://raw.githubusercontent.com/wsclx/ink-wall-theme/main/images/dashboard-light-desktop-no-cardmod.png)
 
@@ -80,7 +81,7 @@ frontend:
 
 Adjust the path to where card-mod is installed on your system.
 
-The solid ink tile applies to tile cards of these domains when they are on: `light`, `switch`, `fan`, `media_player`, `climate`, `input_boolean`, `humidifier`, `water_heater`, `vacuum`, `remote`, `siren`, `automation`, `script`, `cover`. Sensors are left out on purpose: the tile card marks every entity with a value as active.
+The reversed tile follows the state, not the kind of device: `on`, `open`, `opening`, `closing`, `unlocked`, `unlocking`, `jammed`, `playing`, `heat`, `cool`, `heat_cool`, `auto`, `dry`, `fan_only`, `cleaning`, `returning`, `mowing`, `triggered`, `pending`, `arming`. A paused player, a locked door or an armed alarm stay outlined; a sensor showing a number never reverses. The dashed rule applies to the states `unavailable` and `unknown`.
 
 ## Customise
 
@@ -90,6 +91,8 @@ Change the variables below in a copy of the theme, or override them with card-mo
 |---|---|
 | `ink-wall-ink`, `ink-wall-paper` | Ink and paper of solid tiles and the sidebar bar (card-mod), separate values for light and dark |
 | `lovelace-background`, `card-background-color` | Paper behind the cards and of the cards |
+| `ha-section-grid-row-gap`, `ha-section-grid-column-gap` | Paper between cards in a section |
+| `ha-tile-info-secondary-font-size` | Size of the state line in tiles |
 | `ha-card-border-color`, `ha-card-border-width` | The rule around every card |
 | `ink-wall-serif`, `ink-wall-sans` | Font stacks for numbers and titles, and for labels |
 | `state-active-color`, `state-inactive-color` | Grey of on and off icons |
@@ -101,7 +104,7 @@ Change the variables below in a copy of the theme, or override them with card-mo
 - Home Assistant does not guarantee theme variables between releases. If something looks off after an update, please open an issue with your version.
 - **Coloured lights:** a light that reports a colour shows that colour in its tile icon, its brightness slider and its badge. The frontend sets it per light, so a theme cannot change it. With card-mod the tile turns ink and the badge grey; in the light's dialog the colour picker keeps its colours.
 - **Patterns:** a theme can only set colours, not hatching or dot patterns. States that used to differ by colour alone (heating and cooling on the thermostat ring, armed and triggered alarms) differ by grey value, icon and text.
-- Without card-mod a theme cannot fill a whole tile by its state, only the icon. The solid ink tile needs card-mod.
+- Without card-mod a theme cannot fill a whole tile by its state or change its rule, only the icon. The reversed tile and the dashed rule need card-mod.
 - Switches keep their round shape and a few frontend transitions (about 0.2 s) stay: both are fixed in the frontend.
 - Camera images, maps, media artwork and entity pictures keep their own colours, and so do the round icons of the settings menu and the logos of integrations.
 - The serif depends on your device. Where none of the listed fonts is installed, the system serif is used.
