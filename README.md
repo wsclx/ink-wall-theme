@@ -15,8 +15,8 @@ A strictly monochrome theme for Home Assistant, made for e-paper and e-ink wall 
 ## What you get
 
 - **No hue in the dashboard.** Every state colour of Home Assistant is mapped to a grey: lights, heating, cooling, alarms, locks, batteries, weather, energy, graphs, buttons, alerts. The dashboard looks the same on a greyscale panel as on a colour screen.
-- **States you can read without colour.** Strong states (on, heating, lit, open, triggered) are ink, calm states (cooling, locked, docked) are dark grey, off is light grey. Icons and state text stay as they are, so a state never depends on colour alone.
-- **Six grey values.** Light mode uses `#141414`, `#4d4d4d`, `#8a8a8a`, `#c4c4c4`, `#e6e6e6` and `#f4f4f4`, which survive the 16 grey levels of a typical e-ink panel. On a 4-level panel the light greys merge and the 2 px rules carry the layout.
+- **States you can read without colour.** Strong states (on, heating, lit, open, triggered) are ink, calm states (locked, docked) are dark grey, off is mid grey. On the thermostat ring heating is ink and cooling light grey. Error notices sit on a darker grey than warnings, warnings darker than information. Icons and state text stay as they are, so a state never depends on grey value alone either.
+- **Greys on the 16 levels of an e-ink panel.** Every grey of the theme is a multiple of `#111111`, one of the 16 levels a typical e-ink panel shows, so no two roles fall on the same level. Light mode: ink `#111111`, quiet text `#444444`, off `#777777`, slider track `#888888`, fills `#cccccc`, paper `#dddddd`, cards `#eeeeee`. On a 4-level panel paper and cards merge, and the 2 px rules carry the layout.
 - **Flat and still.** Square corners, 2 px ink rules around every card with 12 px of paper between them, no shadows, no blur. Home Assistant's own animations are switched off.
 - **States you can read from across the room.** The state line of a tile is as large as its name, not a small caption.
 - **Book serif for numbers and titles** from the system: Charter on Apple devices (a typeface drawn for low-resolution printers), Palatino or Cambria on Windows, Noto Serif or DejaVu Serif on Android and Linux. Labels use Helvetica Neue or Arial. Nothing is downloaded.
@@ -66,6 +66,7 @@ Most e-ink wall displays either run a web browser, or show an image of a dashboa
 - **Browser in kiosk or full-screen mode.** Start the browser of the device in its kiosk or full-screen mode with the address of the dashboard, for example `http://homeassistant.local:8123/lovelace/0`. To hide the header and sidebar, use a kiosk plugin from the Marketplace or a dashboard made for the display.
 - **Rendered images.** If your display shows an image that a server renders with a headless browser, log that browser in as the display user, or pass the theme to the renderer if it offers a theme setting. The page is already grey, so the conversion to the panel's grey levels loses nothing.
 - **Fewer refreshes.** E-ink panels redraw slowly. Prefer cards that change rarely (temperatures, states, the weather forecast) over live graphs, cameras and media artwork, and give the display a long refresh interval.
+- **Full refresh now and then.** A reversed tile turns a large area from paper to ink. Panels with partial refresh keep a faint ghost of it; let the display do a full refresh every few updates.
 - **Large type.** Use tile and entity cards rather than dense lists, and raise the text size of the browser if the panel is far away.
 
 ## Optional: card-mod
@@ -103,9 +104,11 @@ Change the variables below in a copy of the theme, or override them with card-mo
 
 - Home Assistant does not guarantee theme variables between releases. If something looks off after an update, please open an issue with your version.
 - **Coloured lights:** a light that reports a colour shows that colour in its tile icon, its brightness slider and its badge. The frontend sets it per light, so a theme cannot change it. With card-mod the tile turns ink and the badge grey; in the light's dialog the colour picker keeps its colours.
-- **Patterns:** a theme can only set colours, not hatching or dot patterns. States that used to differ by colour alone (heating and cooling on the thermostat ring, armed and triggered alarms) differ by grey value, icon and text.
+- **Patterns:** a theme can only set colours and, with card-mod, the style of a rule (the dashed rule of unavailable tiles), not hatching or dot patterns. States that used to differ by colour alone (armed and triggered alarms, errors and warnings) differ by grey value, icon and text. The weather icons are filled shapes, so the sun is a grey disc rather than a line drawing.
 - Without card-mod a theme cannot fill a whole tile by its state or change its rule, only the icon. The reversed tile and the dashed rule need card-mod.
-- Switches keep their round shape and a few frontend transitions (about 0.2 s) stay: both are fixed in the frontend.
+- Switches keep their round shape and a few frontend transitions (about 0.2 s) stay: both are fixed in the frontend. The press ripple is switched off on tiles with card-mod and wherever the frontend reads the theme value; some controls keep their own.
+- Keyboard focus on a reversed tile is drawn in paper colour with card-mod; without card-mod it is a faint line. Wall displays are usually touch-only.
+- Dark-mode colour scales follow the roles Home Assistant 2026.11 gives each step, not a smooth ramp. If buttons or alerts look wrong after a frontend update, please open an issue.
 - Camera images, maps, media artwork and entity pictures keep their own colours, and so do the round icons of the settings menu and the logos of integrations.
 - The serif depends on your device. Where none of the listed fonts is installed, the system serif is used.
 - The card-mod rules target internal elements of the frontend. A frontend update can break them; the theme itself keeps working.
