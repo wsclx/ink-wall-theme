@@ -113,7 +113,7 @@ Change the variables below in a copy of the theme, or override them with card-mo
 - Without card-mod a theme cannot fill a whole tile by its state or change its rule, only the icon. The reversed tile and the dashed rule need card-mod.
 - Switches keep their round shape and a few frontend transitions (about 0.2 s) stay: both are fixed in the frontend. The press ripple is switched off on tiles with card-mod and wherever the frontend reads the theme value; some controls keep their own.
 - The thermostat ring draws its background track and the coloured ranges with a fixed opacity, so the track stays faint and heating and cooling differ by about 3:1 there; the target markers and the numbers carry full contrast.
-- Keyboard focus on a reversed tile is drawn in paper colour with card-mod; without card-mod it is a faint line. Wall displays are usually touch-only.
+- With card-mod, keyboard focus on a tile is a 2 px ink ring with a paper gap; without card-mod it is the frontend's faint 1 px line. Wall displays are usually touch-only.
 - Dark-mode colour scales follow the roles Home Assistant 2026.11 gives each step, not a smooth ramp. If buttons or alerts look wrong after a frontend update, please open an issue.
 - Camera images, maps, media artwork and entity pictures keep their own colours, and so do the round icons of the settings menu and the logos of integrations.
 - The serif depends on your device. Where none of the listed fonts is installed, the system serif is used.

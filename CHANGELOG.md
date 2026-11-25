@@ -11,7 +11,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), ver
 - Every grey now sits on one of the 16 levels of an e-ink panel (multiples of `#111111`). Before, paper and cards fell on the same level, in light and in dark mode.
 - Slider tracks and icons of unavailable entities reach 3:1 against the card (were 1.6:1 to 2.3:1).
 - Heating and cooling differ on the thermostat ring (ink and light grey); error notices sit on a darker grey than warnings and information.
-- Keyboard focus on a reversed tile is drawn in paper colour (with card-mod).
+- Keyboard focus on tiles is a 2 px ink ring with a paper gap, visible on reversed tiles too (with card-mod).
 
 ### Changed
 - Press ripple switched off on tiles (with card-mod) and wherever the frontend reads the theme value.

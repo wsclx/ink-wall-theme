@@ -266,7 +266,8 @@ Ink Wall:
   weather-icon-cloud-front-color: "#cccccc"
   weather-icon-cloud-back-color: "#666666"
 
-  # Optional, card-mod 4.x: no press ripple on tiles (it flickers on e-paper).
+  # Optional, card-mod 4.x: no press ripple on tiles (it flickers on e-paper); keyboard focus as a 2 px ink ring
+  # with a paper gap, visible on outlined and on reversed tiles.
   # A tile prints in reverse (paper on ink) while its device is doing something or needs
   # a look: on, open, unlocked, playing, heating or cooling, cleaning, triggered. Tiles of entities that are
   # unavailable or unknown get a dashed rule, so a dead sensor is visible without colour.
@@ -281,9 +282,9 @@ Ink Wall:
       --ha-tile-info-primary-color: var(--ink-wall-paper);
       --ha-tile-info-secondary-color: var(--ink-wall-paper);
       --control-slider-background: var(--ink-wall-paper);
-      --ha-color-focus: var(--ink-wall-paper);
     }
     ha-tile-container { --ha-ripple-hover-opacity: 0; --ha-ripple-pressed-opacity: 0; }
+    ha-card:has(ha-tile-container[focused]) { outline: 2px solid var(--ink-wall-ink) !important; outline-offset: 2px; }
     ha-card:has(ha-tile-icon:is([data-state=unavailable], [data-state=unknown])) { border-style: dashed; }
     :host(hui-entity-card) .value, :host(hui-weather-forecast-card) .temp, :host(hui-sensor-card) .value { font-family: var(--ink-wall-serif); }
     :host(hui-thermostat-card) ha-state-control-climate-temperature { font-family: var(--ink-wall-serif); }
